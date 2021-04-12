@@ -8,8 +8,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import java.sql.* ;
 
 public class GUI {
 
@@ -57,6 +59,12 @@ wordcount test = new wordcount() ;
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

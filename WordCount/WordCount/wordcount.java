@@ -20,6 +20,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.sql.*;  
+/*class Main{  
+public static void main(String args[]){  
+try{ */  
+ 
 
 public class wordcount {
 	private static JFrame frame;
@@ -44,9 +49,11 @@ public wordcount () {
 	/**
 	 * Create the application.
 	 * @throws FileNotFoundException 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	
-         public static String returnwordcount () throws FileNotFoundException {
+         public static String returnwordcount () throws FileNotFoundException, SQLException, ClassNotFoundException {
         	 java.util.HashMap<String, Integer> map = new HashMap<String, Integer>();
         		/**
         		 * 
@@ -114,6 +121,15 @@ public wordcount () {
         		});
         		int i = 0 ;
         		StringBuilder countlist = new StringBuilder(); 
+        		Class.forName("com.mysql.jdbc.Driver");  
+        		Connection con=DriverManager.getConnection(  
+        		"jdbc:mysql://localhost:3306/word occurrences?characterEncoding=utf8","root","root");  
+        		//here sonoo is database name, root is username and password  
+        		Statement stmt=con.createStatement();  
+        		
+        		//while(rs.next())  
+        		//System.out.println(rs.getString(1)+"  ");  
+        		//con.close(); 
         		for (Object track : sortedMap) {
         		    if (i < 20 ) { // sorts for the top 20 
         		    	countlist.append(((Map.Entry<String, Integer>) track).getKey() + " : "
@@ -125,8 +141,9 @@ public wordcount () {
         		    	 * @returns i 
         		    	 */
         		    }
-        			
+        		    stmt.executeUpdate("insert into word value ('"+(((Map.Entry<String, Integer>) track).getKey())+"')"   );  
         		}
+        		con.close();
         		return countlist.toString() ; 
          }
 	/**
